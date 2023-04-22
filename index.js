@@ -1,5 +1,4 @@
-window.addEventListener('load', () => {
+import ToDoList from "./src/ToDoList.js";
 
-    new ToDoList('root');
 
-});
+
