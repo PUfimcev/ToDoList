@@ -182,7 +182,7 @@ button {
     background-color: var(--color-blue);
 }
 
-.task__elem{
+.task__elem {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -191,17 +191,16 @@ button {
     
 }
 
-.task__elem_checkbox{
-    width: 10%;
-    accent-color: var(--color-blue);
-}
-
-.label__elem_checkbox{
-    width: 54%;
+.task__elem_content{
+    width: 64%;
     overflow: hidden;
     background-color: var(--color-yellow);
     padding: 5px 10px;
     height: 100%;
+}
+
+.task__elem_content:hover {
+    background-color: var(--color-green);
 }
 
 .task__title,.task__description {
@@ -209,14 +208,6 @@ button {
     width: 100%;
     white-space: normal;
 }
-
-.task__elem_checkbox:checked ~ .label__elem_checkbox{
-    text-decoration: line-through;
-    background-color: var(--color-gray);
-    opacity: 0.8;
-}
-
-
 
 /* Task buttons */
 

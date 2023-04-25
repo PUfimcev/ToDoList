@@ -32,15 +32,9 @@ class ToDoList {
             elemTask.classList.add(`task__elem`);
             elemTask.classList.add(`elem${index+1}`);
 
-            let checkBox = document.createElement('input');
-            checkBox.id = `checkbox${index+1}`;
-            checkBox.className = `task__elem_checkbox`;
-            checkBox.type = 'checkbox';
-            checkBox.name = 'elemCheckbox';
-            let label = document.createElement('label');
-            label.classList.add(`label__elem_checkbox`);
-            label.classList.add(`checkbox${index+1}`);
-            label.setAttribute('for', `checkbox${index+1}`);
+            let label = document.createElement('div');
+            label.classList.add(`task__elem_content`);
+            label.classList.add(`elem_content${index+1}`);
 
             if (elem.title) label.innerHTML = `<h6 class='task__title title${index+1}'>${elem.title}</h6>`;
             if(elem.description) {
@@ -91,7 +85,7 @@ class ToDoList {
 
             elemButtons.append(spreadButton, editButton, delButton);
 
-            elemTask.append(checkBox, label, elemButtons);
+            elemTask.append(label, elemButtons);
             this.#outputTask.append(elemTask);
 
             let elemFull = document.querySelector(`.description${index+1}`)
