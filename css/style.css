@@ -1,5 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+:root {
+    --font-family: 'Inter', sans-serif;
+    --font-weight-bold: 900;
+    --color-primary: #deeef8;
+    --color-red: #d71737;
+    --color-blue: #090d77;
+    --color-btn-hover: #186cb0;
+    --color-green: #17d761;
+    --color-yellow: #e7f8aa;
+    --color-light-green: #97f0ba;
+    --color-gray: #bdc0be;
+    --color-back-gray: rgb(162, 158, 158);
+    --step: 5px;
+
+    --base-font-size: 0.95rem;
+    --font-size-multyplier: 1.175;
+
+    --h6-font-size: calc(var(--base-font-size)*var(--font-size-multyplier));
+    --h5-font-size: calc(var(--h6-font-size)*var(--font-size-multyplier));
+    --h4-font-size: calc(var(--h5-font-size)*var(--font-size-multyplier));
+    --h3-font-size: calc(var(--h4-font-size)*var(--font-size-multyplier));
+    --h2-font-size: calc(var(--h3-font-size)*var(--font-size-multyplier));
+    --h1-font-size: calc(var(--h2-font-size)*var(--font-size-multyplier));
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0%;
+}
+
+body {
+    font-family: var(--font-family);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--color-gray);
+
+}
+
+h1 {
+    font-size: var(--h1-font-size);
+    line-height: calc(var(--step)*8);
+    font-weight: var(--font-weight-bold);
+    padding: calc(var(--step)*20) 0 0;
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+    line-height: calc(var(--step)*8);
+    font-weight: var(--font-weight-bold);
+    padding: calc(var(--step)*5) 0 0;
+}
+
+h3 {
+    font-size: var(--h3-font-size);
+    line-height: calc(var(--step)*6);
+    font-weight: var(--font-weight-bold);
+    padding: calc(var(--step)*5) 0;
+}
+
+h4 {
+    font-size: var(--h4-font-size);
+    line-height: calc(var(--step)*6);
+}
+
+h5 {
+    font-size: var(--h5-font-size);
+    line-height: calc(var(--step)*6);
+    font-weight: var(--font-weight-bold);
+}
+
+h6 {
+    font-size: var(--h6-font-size);
+    font-weight: var(--font-weight-bold);
+}
+
+p {
+    font-size: var(--base-font-size);
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+button {
+    font-size: var(--base-font-size);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    background-color: var(--color-blue);
+    color: var(--color-primary);
+    border-radius: 3px;
+    border: 0;
+    width: 80px;
+    padding: 5px 0;
+    
+}
+
+.button__add:hover, .button__removeList:hover, .button__edit:hover, .button__quit:hover {
+    background-color: var(--color-btn-hover);
+}
+
+/* main app */
+.toDoApp{
+    background-color: var(--color-primary);
+    border: 1px solid #000;
+    border-radius: 2%;
+    width: 300px;
+    height: 80vh;
+    padding: 10px 20px;
+    overflow: hidden;    
+}
+
+.toDoApp__input__headTitle{
+    color: var(--color-blue);
+    text-align: center;
+
+}
+/* Input patch and edit form */
+
+.toDoApp__input__inputField, .editElem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.inputFieldTitle, .inputFieldAbout, .editFieldTitle, .editFieldAbout {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.inputField__InputTitle, .inputField__InputAbout, .inputField__InputAbout, .editField__InputTitle {
+    width: 100%;
+    padding: 10px;
+} 
+
+.inputField__InputAbout {
+    height: 100px;
+}
+
+.inputField__InputTitle::placeholder, .inputField__InputAbout::placeholder, .inputField__InputAbout::placeholder, .editField__InputTitle::placeholder {
+    font-family: var(--font-family);
+    text-align: center;
+} 
+
+/* buttons on input patch and adit form */
+
+.inputField__buttons, .editField__buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+/* Task elems */
+
+.toDoApp__output{
+    width: 100%;
+    height: 41%;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    margin-right: 3px;
+}
+
+.toDoApp__output::-webkit-scrollbar{
+    width: 3px;
+    background-color: var(--color-primary);
+    
+}
+
+.toDoApp__output::-webkit-scrollbar-thumb{
+    background-color: var(--color-blue);
+}
+
+.task__elem{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    width: 100%;
+    
+}
+
+.task__elem_checkbox{
+    width: 10%;
+    accent-color: var(--color-blue);
+}
+
+.label__elem_checkbox{
+    width: 54%;
+    overflow: hidden;
+    background-color: var(--color-yellow);
+    padding: 5px 10px;
+    height: 100%;
+}
+
+.task__title,.task__description {
+    height: 100%;
+    width: 100%;
+    white-space: normal;
+}
+
+.task__elem_checkbox:checked ~ .label__elem_checkbox{
+    text-decoration: line-through;
+    background-color: var(--color-gray);
+    opacity: 0.8;
+}
+
+
+
+/* Task buttons */
+
+.task__elem_buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1px;
+    width: 30%;
+}
+
+.task__elem_button{
+    background-color: var(--color-back-gray);
+    padding: 10px;
+    opacity: 0.6;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 15px;
+    border: 0;
+}
+
+.button_spreadButton{
+    background-image: url('/files/3_dots.png');
+}
+
+.task__elem_button:hover{
+    opacity: 1;
+}
+
+.buttonOn {
+    background-color: var(--color-green);
+    background-image: url('/files/paper.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 0;
+    
+}
+
+.editButton{
+    background-image: url('/files/edit.png');
+}
+
+.delbutton{
+    background-image: url('/files/remove.png');
+}
+
+/* No Task name */
+.inputFieldTitle{
+    position: relative;
+}
+
+.noTaskTitle{
+    margin-top: 2px;
+    position: absolute;
+    width: 100%;
+    
+}
+
+.noTaskTitle_content{
+    display: inline-block;
+    text-align: center;
+    background-color: var(--color-primary);
+    color: var(--color-red);
+    padding: 3px 50px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    width: 100%;
+    
+}
+
+/* Edit elements */
+
+.editElem{
+    position: fixed;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-light-green);
+    border: 2px solid var(--color-blue);
+    border-radius: 5px;
+    box-shadow: 0 0 100vh 100vh rgba(40, 39, 39, 0.8);
+    padding: 15px;
+    width: 30%;
+    min-width: 300px;
+    
 }
