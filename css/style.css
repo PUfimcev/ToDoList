@@ -111,7 +111,7 @@ button {
     border: 1px solid #000;
     border-radius: 2%;
     width: 300px;
-    height: 80vh;
+    height: 65vh;
     padding: 10px 20px;
     overflow: hidden;    
 }
@@ -231,7 +231,7 @@ button {
 }
 
 .button_spreadButton{
-    background-image: url('/files/3_dots.png');
+    background-image: url('../files/3_dots.png');
 }
 
 .task__elem_button:hover{
@@ -240,7 +240,7 @@ button {
 
 .buttonOn {
     background-color: var(--color-green);
-    background-image: url('/files/paper.png');
+    background-image: url('../files/paper.png');
     background-repeat: no-repeat;
     background-position: center;
     border: 0;
@@ -248,11 +248,11 @@ button {
 }
 
 .editButton{
-    background-image: url('/files/edit.png');
+    background-image: url('../files/edit.png');
 }
 
 .delbutton{
-    background-image: url('/files/remove.png');
+    background-image: url('../files/remove.png');
 }
 
 /* No Task name */
