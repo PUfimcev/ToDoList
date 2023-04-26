@@ -32,7 +32,7 @@
     padding: 0%;
 }
 
-body {
+html, body {
     font-family: var(--font-family);
     width: 100vw;
     height: 100vh;
@@ -111,8 +111,8 @@ button {
     border: 1px solid #000;
     border-radius: 2%;
     width: 300px;
-    height: 65vh;
-    padding: 10px 20px;
+    height: 600px;
+    padding: 0px 20px;
     overflow: hidden;    
 }
 
@@ -150,6 +150,10 @@ button {
     text-align: center;
 } 
 
+.inputField__nameInputTitle, .inputField__nameInputAbout, .editField__nameInputTitle, .editField__nameInputAbout{
+    margin-bottom: 8px;
+} 
+
 /* buttons on input patch and adit form */
 
 .inputField__buttons, .editField__buttons{
@@ -165,13 +169,12 @@ button {
 
 .toDoApp__output{
     width: 100%;
-    height: 41%;
+    height: 220px;
     overflow: hidden;
     overflow-y: scroll;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
     margin-right: 3px;
 }
+
 
 .toDoApp__output::-webkit-scrollbar{
     width: 3px;
@@ -189,12 +192,14 @@ button {
     align-items: center;
     border-bottom: 1px solid #000;
     width: 100%;
-    
+}
+
+.task__elem:first-child{
+    border-top: 1px solid #000;
 }
 
 .task__elem_content{
     width: 64%;
-    overflow: hidden;
     background-color: var(--color-yellow);
     padding: 5px 10px;
     height: 100%;
@@ -283,7 +288,7 @@ button {
 
 .editElem{
     position: fixed;
-    z-index: 4;
+    z-index: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

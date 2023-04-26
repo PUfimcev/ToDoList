@@ -3,8 +3,8 @@ class ToDoList {
     #titleTask;
     #descriptTask;
     #task = {
-        title: '',
-        description: '',
+        // title: '',
+        // description: '',
     };
     #toDoApp;
     #inputTask;
@@ -21,11 +21,11 @@ class ToDoList {
     #getTasks(){
 
         let tasks = this.#getData();
-
-        this.#outputTask.innerHTML = '';
-
         if(tasks.length === 0) return;
 
+        this.#outputTask.innerHTML = '';
+        
+        
         tasks.forEach((elem, index) => {
             let showContent = false;
 
@@ -36,12 +36,12 @@ class ToDoList {
             let label = document.createElement('div');
             label.classList.add(`task__elem_content`);
             label.classList.add(`elem_content${index+1}`);
-
+            
             if (elem.title) label.innerHTML = `<h6 class='task__title title${index+1}'>${elem.title}</h6>`;
             if(elem.description) {
                 label.innerHTML += `<p class='task__description description${index+1}'>${elem.description}</p>`;
             } else {
-                label.innerHTML += `<p class='task__description description${index+1}'>Task not defined</p>`;
+                label.innerHTML += `<p class='task__description description${index+1}'>No content</p>`;
             }
 
             let elemButtons = document.createElement('div');
@@ -73,11 +73,14 @@ class ToDoList {
 
             editButton.addEventListener('click', () => {
                 let findEditElem = document.querySelectorAll('.editElem');
+
                 if(findEditElem.length === 0) {
                     this.#onEdit(index);
+
                 } else if(findEditElem.lengt > 1){
                     return;
                 }
+                
             });
 
             delButton.addEventListener('click', () => {
@@ -95,7 +98,6 @@ class ToDoList {
             
             label.addEventListener('click', (event)=>{
                 
-                console.log(event.currentTarget.closest('li'));
                 if(event.currentTarget.closest('li').matches('.taskDone')) {
                     event.currentTarget.closest('li').classList = `task__elem elem${index+1}`
                     let newArr = this.#done.filter((elem)=>{
@@ -196,39 +198,36 @@ class ToDoList {
         let editFieldTitle = document.createElement('div');
         editFieldTitle.classList.add('editFieldTitle');
 
-        let nameFieldTitleTask = document.createElement('h5');
+        let nameFieldTitleTask = document.createElement('h6');
         nameFieldTitleTask.classList.add('editField__nameInputTitle');
         nameFieldTitleTask.innerHTML = 'Task:';
 
         let editTitleTask = document.createElement('input');
-        editTitleTask.innerHTML = '';
-        Object.assign(editTitleTask, {
-            className: "editField__InputTitle",
-            type: 'text',
-            name: 'titleEdit',
-            placeholder: 'Enter task',
-            autocomplete: 'on',
-        });
-        // console.log(elemForEdit['title'])
-        editTitleTask.innerHTML = elemForEdit.title;
+        editTitleTask.classList.add("editField__InputTitle");
+        editTitleTask.type = 'text';        
+        editTitleTask.name = 'titleEdit';
+        editTitleTask.placeholder = 'Enter task';
+        editTitleTask.value = elemForEdit.title;
+    
         editFieldTitle.append(nameFieldTitleTask, editTitleTask);
 
         // create input of task details
 
         let editFieldAbout = document.createElement('div');
         editFieldAbout.classList.add('editFieldAbout');
-        let nameFieldAboutTask = document.createElement('h5');
+        let nameFieldAboutTask = document.createElement('h6');
         Object.assign(nameFieldAboutTask, {
             className: "editField__nameInputAbout",
         });
         nameFieldAboutTask.innerHTML = 'Content:';
+
         let editDescriptTask = document.createElement('textarea');
         Object.assign(editDescriptTask, {
             className: "inputField__InputAbout",
             name: 'descriptionEdit',
             placeholder: 'Enter details',
+            value: elemForEdit.description,
         });
-        editDescriptTask.innerHTML = elemForEdit.description;
 
         editFieldAbout.append(nameFieldAboutTask, editDescriptTask);
 
@@ -250,10 +249,11 @@ class ToDoList {
         editElem.append(editFieldTitle, editFieldAbout, editButtons);
         
         this.#toDoApp.after(editElem);
-        console.log(editTitleTask.value)
+    
         
         editButton.addEventListener('click', ()=> {
-            let title = editTitleTask.value ? editTitleTask.value : elemForEdit.title;
+            let title = (editTitleTask.value !== '') ? editTitleTask.value : elemForEdit.title;
+            
             let description = editDescriptTask.value;
 
             let newData = {
@@ -265,7 +265,7 @@ class ToDoList {
             editElem.remove();
         })
 
-        quitButton.addEventListener('click', ()=> {
+        quitButton.addEventListener('click', (e) => {
 
             editElem.remove();
 
@@ -296,8 +296,9 @@ class ToDoList {
                 description: data.description,
             }
             
-        this.#tasksList.push(this.#task);
-        this.#getTasks();
+            this.#tasksList.push(this.#task);
+            this.#getTasks();
+            
 
         } else {
 
@@ -315,6 +316,7 @@ class ToDoList {
             this.#titleTask.value = '';
             this.#descriptTask.value = '';
         }
+        
     }
 
     #noteNoTitle(){
