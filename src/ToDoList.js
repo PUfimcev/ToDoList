@@ -10,6 +10,7 @@ class ToDoList {
     #inputTask;
     #outputTask;
 
+    #done = [];
 
     constructor(){
         this.#createUIApp();
@@ -91,6 +92,21 @@ class ToDoList {
             let elemFull = document.querySelector(`.description${index+1}`)
             elemFull.style.display = 'none';
             
+            
+            label.addEventListener('click', (event)=>{
+                
+                console.log(event.currentTarget.closest('li'));
+                if(event.currentTarget.closest('li').matches('.taskDone')) {
+                    event.currentTarget.closest('li').classList = `task__elem elem${index+1}`
+                    let newArr = this.#done.filter((elem)=>{
+                        return elem !== index;
+                    });
+                    this.#done = newArr;
+                } else {
+                    event.currentTarget.closest('li').classList +=' taskDone';
+                    this.#done.push(index);
+                }
+            })
             
         })
         
@@ -193,8 +209,8 @@ class ToDoList {
             placeholder: 'Enter task',
             autocomplete: 'on',
         });
-        console.log(elemForEdit['title'])
-        // editTitleTask.innerHTML = elemForEdit['title'];
+        // console.log(elemForEdit['title'])
+        editTitleTask.innerHTML = elemForEdit.title;
         editFieldTitle.append(nameFieldTitleTask, editTitleTask);
 
         // create input of task details
@@ -332,6 +348,20 @@ class ToDoList {
         return this.#tasksList;
     }
 
+    // Delete chosen
+
+    #deldone(data){
+        localStorage.removeItem('todoapp');
+        let newList = this.#tasksList.filter((elem, index) => {
+            return data.includes(index) !== true;
+        })
+
+        this.#tasksList = newList;
+        this.#getTasks();
+
+    }
+
+
     // Create introductory interface
 
     #createUIApp(){
@@ -416,7 +446,11 @@ class ToDoList {
         removeButton.classList.add('button__removeList');
         removeButton.innerHTML = 'Del all';
 
-        inputButtons.append(inputButton, removeButton);
+        let delChosenButton = document.createElement('button');
+        delChosenButton.classList.add('button__delChosen');
+        delChosenButton.innerHTML = 'Del sel';
+
+        inputButtons.append(inputButton, removeButton, delChosenButton);
 
         inputField.append(inputFieldTitle, inputFieldAbout, inputButtons);
         
@@ -441,9 +475,14 @@ class ToDoList {
         removeButton.addEventListener('click', () => {
             this.#outputTask.innerHTML = '';
             this.#tasksList.length = 0;
-            
+
             this.#getTasks();
             localStorage.removeItem('todoapp');
+        })
+        
+        delChosenButton.addEventListener('click', () => {
+            this.#deldone(this.#done);
+            this.#getTasks();
         })
 
         this.Storage;

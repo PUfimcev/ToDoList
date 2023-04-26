@@ -5,6 +5,7 @@
     --font-weight-bold: 900;
     --color-primary: #deeef8;
     --color-red: #d71737;
+    --color-white: #fff;
     --color-blue: #090d77;
     --color-btn-hover: #186cb0;
     --color-green: #17d761;
@@ -95,7 +96,7 @@ button {
     color: var(--color-primary);
     border-radius: 3px;
     border: 0;
-    width: 80px;
+    width: 70px;
     padding: 5px 0;
     
 }
@@ -269,7 +270,7 @@ button {
 .noTaskTitle_content{
     display: inline-block;
     text-align: center;
-    background-color: var(--color-primary);
+    background-color: var(--color-white);
     color: var(--color-red);
     padding: 3px 50px;
     border: 1px solid #000;
@@ -294,4 +295,9 @@ button {
     width: 30%;
     min-width: 300px;
     
+}
+
+.taskDone >.task__elem_content {
+    text-decoration: line-through;
+    background: var(--color-gray);
 }
