@@ -34,6 +34,9 @@
 
 html, body {
     font-family: var(--font-family);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -85,6 +88,7 @@ p {
 #root {
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 button {
@@ -113,7 +117,6 @@ button {
     height: 600px;
     padding: 20px;
     overflow: hidden;
-    margin-top: 100px;
 }
 
 .toDoApp__input__headTitle{
