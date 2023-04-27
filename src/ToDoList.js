@@ -33,15 +33,15 @@ class ToDoList {
             elemTask.classList.add(`task__elem`);
             elemTask.classList.add(`elem${index+1}`);
 
-            let label = document.createElement('div');
-            label.classList.add(`task__elem_content`);
-            label.classList.add(`elem_content${index+1}`);
+            let content = document.createElement('div');
+            content.classList.add(`task__elem_content`);
+            content.classList.add(`elem_content${index+1}`);
             
-            if (elem.title) label.innerHTML = `<h6 class='task__title title${index+1}'>${elem.title}</h6>`;
+            if (elem.title) content.innerHTML = `<h6 class='task__title title${index+1}'>${elem.title}</h6>`;
             if(elem.description) {
-                label.innerHTML += `<p class='task__description description${index+1}'>${elem.description}</p>`;
+                content.innerHTML += `<p class='task__description description${index+1}'>${elem.description}</p>`;
             } else {
-                label.innerHTML += `<p class='task__description description${index+1}'>No content</p>`;
+                content.innerHTML += `<p class='task__description description${index+1}'>No content</p>`;
             }
 
             let elemButtons = document.createElement('div');
@@ -89,14 +89,14 @@ class ToDoList {
 
             elemButtons.append(spreadButton, editButton, delButton);
 
-            elemTask.append(label, elemButtons);
+            elemTask.append(content, elemButtons);
             this.#outputTask.append(elemTask);
 
             let elemFull = document.querySelector(`.description${index+1}`)
             elemFull.style.display = 'none';
             
             
-            label.addEventListener('click', (event)=>{
+            content.addEventListener('click', (event)=>{
                 
                 if(event.currentTarget.closest('li').matches('.taskDone')) {
                     event.currentTarget.closest('li').classList = `task__elem elem${index+1}`
@@ -179,6 +179,9 @@ class ToDoList {
         
         // Create edit element
 
+        let editSection = document.createElement('aside');
+        editSection.classList.add('editContainer');
+
         let editElem = document.createElement('div');
         editElem.classList.add('editElem');
 
@@ -247,8 +250,8 @@ class ToDoList {
         editButtons.append(editButton, quitButton);
 
         editElem.append(editFieldTitle, editFieldAbout, editButtons);
-        
-        this.#toDoApp.after(editElem);
+        editSection.append(editElem);
+        this.#toDoApp.after(editSection);
     
         
         editButton.addEventListener('click', ()=> {
@@ -262,27 +265,15 @@ class ToDoList {
             }
             this.#editTask(id, newData);
             
-            editElem.remove();
+            editSection.remove();
         })
 
-        quitButton.addEventListener('click', (e) => {
+        quitButton.addEventListener('click', () => {
 
-            editElem.remove();
+            editSection.remove();
 
         });
        
-        this.#getTasks();
-    }
-
-    // remove one task
-
-    #removeTask(id){
-
-        let newList = this.#tasksList.filter((elem, index) => {
-            return index !== id;
-        })
-
-        this.#tasksList = newList;
         this.#getTasks();
     }
 
@@ -350,19 +341,44 @@ class ToDoList {
         return this.#tasksList;
     }
 
+    // Delete all elements
+
+    #delAllTasks(){
+        this.#outputTask.innerHTML = '';
+        this.#tasksList.length = 0;
+        this.#getTasks();
+        localStorage.removeItem('todoapp');
+    }
+
+
     // Delete chosen
 
     #deldone(data){
-        localStorage.removeItem('todoapp');
+        // localStorage.removeItem('todoapp');
         let newList = this.#tasksList.filter((elem, index) => {
             return data.includes(index) !== true;
         })
 
-        this.#tasksList = newList;
+        if(newList.length > 0) {
+            this.#tasksList = newList;
+        } else {
+            this.#delAllTasks()
+        }
+        
         this.#getTasks();
 
     }
 
+     // remove one task
+
+     #removeTask(id){
+
+        this.#tasksList.splice(id, 1);
+
+        if(this.#tasksList.length === 0) this.#delAllTasks()
+        
+        this.#getTasks();
+    }
 
     // Create introductory interface
 
@@ -475,11 +491,7 @@ class ToDoList {
         });
 
         removeButton.addEventListener('click', () => {
-            this.#outputTask.innerHTML = '';
-            this.#tasksList.length = 0;
-
-            this.#getTasks();
-            localStorage.removeItem('todoapp');
+            this.#delAllTasks()
         })
         
         delChosenButton.addEventListener('click', () => {

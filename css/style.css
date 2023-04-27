@@ -85,7 +85,6 @@ p {
 #root {
     display: flex;
     justify-content: center;
-    padding-top: 100px;
 }
 
 button {
@@ -112,8 +111,9 @@ button {
     border-radius: 2%;
     width: 300px;
     height: 600px;
-    padding: 0px 20px;
-    overflow: hidden;    
+    padding: 20px;
+    overflow: hidden;
+    margin-top: 100px;
 }
 
 .toDoApp__input__headTitle{
@@ -286,16 +286,21 @@ button {
 
 /* Edit elements */
 
-.editElem{
+.editContainer{
     position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(40, 39, 39, 0.8);
     z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editElem{
     background: var(--color-light-green);
     border: 2px solid var(--color-blue);
     border-radius: 5px;
-    box-shadow: 0 0 100vh 100vh rgba(40, 39, 39, 0.8);
     padding: 15px;
     width: 30%;
     min-width: 300px;
